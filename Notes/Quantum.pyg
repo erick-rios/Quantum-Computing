@@ -1,0 +1,98 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.stats import f_oneway
+
+datos = pd.read_csv("/home/soundskydriver/Documents/tarea_2.csv")
+
+# Calcular los promedios por cada zona
+promedios_zonas = datos[
+    ['Laboratorio A',
+     'Laboratorio B',
+     'Laboratorio C',
+     'Laboratorio D']
+    ].mean()
+
+# Imprimir los promedios
+print("Promedio Laboratorio A:", promedios_zonas['Laboratorio A'])
+print("Promedio Laboratorio B:", promedios_zonas['Laboratorio B'])
+print("Promedio Laboratorio C:", promedios_zonas['Laboratorio C'])
+print("Promedio Laboratorio D:", promedios_zonas['Laboratorio D'])
+
+# Calcular la varianza para cada columna (zona)
+varianza_zonas = datos[
+    ['Laboratorio A',
+     'Laboratorio B',
+     'Laboratorio C',
+     'Laboratorio D']
+    ].var()
+
+# Calcular la desviación estándar para cada columna (zona)
+std_zonas = datos[
+    ['Laboratorio A',
+     'Laboratorio B',
+     'Laboratorio C',
+     'Laboratorio D']
+    ].std()
+
+# Imprimir los resultados
+print("Varianza por zona:")
+print(varianza_zonas)
+
+print("\nDesviación estándar por zona:")
+print(std_zonas)
+
+for i in ['A','B','C','D']:
+    # Crear el diagrama de dispersión
+    plt.scatter(
+        datos.index + 1,
+        datos[f'Laboratorio {i}'],
+        label=f'Laboratorio {i}'
+        )
+
+    # Agregar etiquetas y título
+    plt.xlabel('Laboratorio')
+    plt.ylabel('Análisis Clínico')
+    plt.title('Diagrama de Dispersión por laboratorio')
+
+    # Mostrar la leyenda
+    plt.legend()
+
+    # Mostrar el diagrama de dispersión
+    plt.savefig("diagrama_dispersion.png")
+    plt.show()
+
+# Crear el diagrama de cajas
+datos[
+    ['Laboratorio A',
+     'Laboratorio B',
+     'Laboratorio C',
+     'Laboratorio D']
+    ].boxplot()
+
+# Agregar etiquetas y título
+plt.xlabel('Zonas')
+plt.ylabel('Análisis Clínico')
+plt.title('Diagrama de Cajas por laboratorio')
+
+# Mostrar el diagrama de cajas
+plt.show()
+
+#ANALISIS ANOVA
+# Obtener las columnas relevantes para el ANOVA
+grupo1 = datos['Laboratorio A']
+grupo2 = datos['Laboratorio B']
+grupo3 = datos['Laboratorio C']
+grupo4 = datos['Laboratorio D']
+
+# Realizar el ANOVA
+resultado_anova = f_oneway(grupo1, grupo2, grupo3, grupo4)
+
+# Imprimir el resultado
+print("Estadística F:", resultado_anova.statistic)
+print("Valor p:", resultado_anova.pvalue)
+
+# Interpretar el resultado
+if resultado_anova.pvalue < 0.05:
+    print("Hay diferencias significativas entre los laboratorios.")
+else:
+    print("No hay diferencias significativas entre los laboratorios.")

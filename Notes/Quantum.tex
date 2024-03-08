@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{geometry}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{amssymb}
+
+
+\geometry{margin=1.2in}
+
+\usepackage[style=apa, backend=biber]{biblatex}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\usepackage{xcolor}
+
+\newtcbtheorem[number within=section]{mytheo}{Theorem}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+
+\newtcbtheorem[number within=section]{mydef}{Definition}%
+{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{th}
+
+
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{}
+
+\title{Introduction to Mathematics of Quantum Computing}
+\author{Erick Jesús Ríos González}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\noindent A quantum computer is a device that performs computational operations 
+taking advantage of specific properties described by quantum mechanics.
+%%%%%%%%%%%%%%%%% begins the document %%%%%%%%%%%%%%%%
+\begin{mytheo}{This is my title}{theoexample}
+    This is the text of the theorem. The counter is automatically assigned and,
+    in this example, prefixed with the section number. This theorem is numbered with
+    \ref{th:theoexample} and is given on page \pageref{th:theoexample}.
+\end{mytheo}
+\begin{mydef}{Hlbert Space}{defexample}
+    A Hilbert Space $\mathbb{H}$ is a complete complex vector space, that is,
+    \begin{equation}
+        \Psi,\Phi \in \mathbb{H} \text{ and } a,b \in \mathbb{C} \implies a\Psi+b\Phi \in \mathbb{H}
+    \end{equation}
+    with a positive-definite scalar product:
+    \begin{equation}
+        \langle\cdot|\cdot\rangle: \mathbb{H}\times\mathbb{H}\to \mathbb{C}
+    \end{equation}
+    such that $\forall \Psi,\Phi, \Psi_1, \Psi_2 \in \mathbb{H}$ and $a,b \in \mathbb{C}$
+    \begin{equation*}
+        \langle\Psi|\Phi\rangle = {\langle\Psi|\Phi\rangle}
+    \end{equation*}
+    \begin{enumerate}
+        \item Primero definimos el invariante de ciclo. De nuestras clases de análisis dos podemos reordenar la serie de este problema bajo la siguiente definición:
+    \begin{mydef}{Convergencia Absoluta}{}
+        Se dice que la serie $\sum a_{n}$ es absolutamente convergente si la serie $\sum\left\vert a_{n}\right\vert$ es convergente . 
+    
+        $\sum a_{n}$ es absolutamente convergente $ \Longrightarrow \sum a_{n}$ es convergente .
+    \end{mydef}
+    esto nos permite escribir el invariante de ciclo como:
+    \begin{equation*}
+        total = \sum_{j=0}^{k-1-{i+1}}A[j+i+1]\cdot x_0^j
+    \end{equation*}
+    ya que se trata de una serie de elementos finitos que es absolutamente convergente.
+    Al inicio del ciclo, cuando $i=k-1$ y $\text{total} = 0$ por la suposición podemos demostrar que:
+    \begin{equation*}
+            \text{total} = \sum_{j=0}^{k-1-(k-1+1)} A[k-(k-1)+1]\cdot x_0^{(k-1)}
+    \end{equation*}
+    \begin{equation*}
+        \sum_{j=0}^{-1} A[k-(k-1)+1]\cdot x_0^{(k-1)}=0
+    \end{equation*}
+    Como la suma es vacía, el invariante de ciclo es correcto incluso antes de inicializar el ciclo.
+    \item Caso base (i=0):
+    \begin{equation*}
+        \text{total} = \sum_{j=0}^{-(k-1+1)} A[k-(k-1)+1]\cdot x_0^{(k-1)}
+    \end{equation*}
+    \item Hipótesis de inducción:
+\end{mydef}
+\end{document}
