@@ -1,0 +1,159 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{geometry}
+\usepackage{pgfplots}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{quantikz}
+\usepackage{braket}
+\geometry{margin=1.2in}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+\usepackage{xcolor}
+
+\newtcbtheorem[number within=section]{mytheo}{Theorem}%
+{colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
+
+\newtcbtheorem[number within=section]{mydef}{Definition}%
+{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{def}
+
+\newtcbtheorem[number within=section]{mylem}{Lema}%
+{colback=gray!5,colframe=gray!35!black,fonttitle=\bfseries}{lem}
+
+\newtcbtheorem[number within=section]{mycor}{Corolario}%
+{colback=orange!5,colframe=orange!35!black,fonttitle=\bfseries}{cor}
+
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{} % Corregido aquí
+
+\title{Aritmética Utilizando la Transformada de Fourier Cuántica}
+\author{Erick Jesús Ríos González}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section{Prerequisitos}
+%%%%%%%%%%%%%%%%% begins the document %%%%%%%%%%%%%%%%
+\noindent Necesitamos introducir notación para fracciones binarias,
+lo cual nos ayudará a reescribir la Transformada Cuántica de Fourier (QFT)
+de manera simplista.
+\begin{mydef}{}{}
+    Para $a_1, \ldots, a_m \in \{0, 1\}$ definimos
+\[
+0.a_1a_2 \ldots a_m := \frac{a_1}{2} + \frac{a_2}{4} + \ldots + \frac{a_m}{2^m} =
+\sum_{l=1}^{m} a_l \cdot 2^{-l}.
+\]
+\end{mydef}
+De esta manera, podemos escribir QFT para cualquier vector \(\ket{x}\) utilizando el 
+siguiente lema:
+\begin{mylem}{}{}
+    Sea $n \in \mathbb{N}$ y
+    \[
+    x = \frac{1}{\sqrt{2^n}} \sum_{j=0}^{n-1} x_j 2^j, \quad \text{donde } x_j \in \{0, 1\} \text{ para } j \in \{0, \ldots, n-1\}.
+    \]
+    Entonces la acción de la transformada cuántica de Fourier $F$ sobre cualquier vector $|x\rangle$ de la base computacional de $\mathcal{H}_n$ puede escribirse como
+    \[
+    F|x\rangle = \frac{1}{\sqrt{2^n}} \bigotimes_{j=0}^{n-1} \left( |0\rangle + e^{2\pi i 0.x_j \ldots x_0} |1\rangle \right).
+    \]
+\end{mylem}
+\section{Ejemplo 1+2}
+Primero comenzamos por hacer la representación binaria de los números
+\(A = 1 \text{ y } B=2 \), pero como el número \(A\) va a ser el que cargué la suma
+tenemos que agregarle un qbit más para evitar los límites de la suma modular.
+\[A = 1 = 001_2\]
+\[B=2=10_2\]
+Sea \(A=a_{2}a_{1}a_{0}\) y \(B=b_1b_0\) las representaciones binarias de \(A \text{ y } B\)
+respectivamente, usando el teorema de reperesntación de Riez, podemos hacer la siguiente representación
+para nuestro ejemplo:
+\[\ket{001_2}= \ket{0}\otimes\ket{0}\otimes\ket{1}\]
+ \[\ket{10_2}=\ket{1}\otimes\ket{0}\]
+Para nuestro ejemplo seguiremos el siguiente circuito:
+
+\begin{figure}[H]
+    \centering
+    \begin{quantikz}
+        \lstick{$\ket{b_1}$} & \qw & \qw & \qw & \qw & \qw&\ctrl{3}&\qw&\ctrl{2}&\qw &\qw &\qw&\rstick{$\ket{b_1}$}\\
+        \lstick{$\ket{b_0}$} & \qw & \qw & \qw & \ctrl{3} & \qw&\ctrl{}&\qw&\ctrl{}&\qw&\qw&\qw &\rstick{$\ket{b_0}$}\\
+        \lstick{$\ket{a_2}$} & \qw & \qw & \gate[3]{QFT} & \qw & \qw &\qw&\qw&\gate{Z_3^{1}}&\qw&\gate[3]{QFT^{\dagger}}&\qw&\rstick{$\ket{(a+b)_2}$}\\
+        \lstick{$\ket{a_1}$} & \qw & \qw & \qw & \qw & \qw&\gate{Z_2^{2}}&\qw&\qw&\qw&\qw&\qw&\rstick{$\ket{(a+b)_1}$}\\
+        \lstick{$\ket{a_0}$} & \qw & \qw & \qw & \gate{Z_1^2} & \qw & \qw&\qw&\qw&\qw&\qw&\qw&\rstick{$\ket{(a+b)_0}$}\\
+    \end{quantikz}
+    \caption{Circuito cuántico para sumar dos números binarios}
+    \label{fig:sumacuantica}
+\end{figure}
+
+Ahora que ya sabemos como vamos a operar usaremos el \texttt{Lema 1.1} y la \texttt{Deficinición 1.1} para aplicar la
+QFT de nuestro número A:
+\[QFT\ket{A} = QFT\ket{001}=\frac{1}{\sqrt{8}}\bigotimes_{j=0}^{2}\left(\ket{0}+\exp[2\pi i 0.a_j\ldots a_0]\ket{1}\right)\]
+\[=\frac{1}{\sqrt{8}}\left[\left(\ket{0}+\exp[2\pi i 0.a_0]\ket{1}\right)\otimes \left(\ket{0}+\exp[2\pi i 0.a_1a_0]\ket{1}\right)\otimes \left(\ket{0}+\exp[2\pi i 0.a_2a_1a_0]\ket{1}\right)\right]\]
+\[=\frac{1}{\sqrt{2}}\left(\ket{0}+\exp[2\pi i 0.1]\ket{1}\right)\otimes\frac{1}{\sqrt{2}}\left(\ket{0}+\exp[2\pi i 0.01]\ket{1}\right)\otimes\frac{1}{\sqrt{2}}\left(\ket{0}+\exp[2\pi i 0.001]\ket{1}\right)\]
+\[=\frac{1}{\sqrt{2}}\left(\ket{0}+\exp[2\pi i\frac{a}{2}]\ket{1}\right)\otimes\frac{1}{\sqrt{2}}\left(\ket{0}+\exp[2\pi i \frac{a}{2^2}]\ket{1}\right)\otimes\frac{1}{\sqrt{2}}\left(\ket{0}+\exp[2\pi i \frac{a}{2^3}]\ket{1}\right)\]
+\begin{equation*}
+    = \underbrace{\frac{1}{\sqrt{2}}\left[\left(\ket{0}+\exp[2\pi i 0.1]\ket{1}\right)\right]}_{{\ket{\phi(a_2)}}} \otimes \underbrace{\frac{1}{\sqrt{2}}\left[\left(\ket{0}+\exp[2\pi i 0.01]\ket{1}\right)\right]}_{\ket{\phi(a_1)}} \otimes \underbrace{\frac{1}{\sqrt{2}}\left[\left(\ket{0}+\exp[2\pi i 0.001]\ket{1}\right)\right]}_{\ket{\phi(a_0)}}
+\end{equation*}
+Despues de la aplicación de QFT a el número A ahora tenemos que nuestro circuito se ha modificado de la siguiente forma:
+\begin{figure}[H]
+    \centering
+    \begin{quantikz}
+        \lstick{$\ket{b_1}$}        & \ctrl{4}       & \qw  & \ctrl{3}      & \qw & \qw           & \qw & \qw                    & \qw & \qw      & \qw & \rstick{$\ket{b_1}$} \\
+        \lstick{$\ket{b_0}$}        & \ctrl{1}       & \qw  & \ctrl{1}      & \qw & \ctrl{1}      & \qw & \qw                    & \qw & \qw      & \qw & \rstick{$\ket{b_0}$} \\
+        \lstick{$\ket{\phi(a_2)}$}  & \qw            & \qw  & \qw           & \qw & \gate{Z}      & \qw & \gate[3]{QFT^\dagger}  & \qw & \swap{2} & \qw & \rstick{$\ket{(a+b)_2}$} \\
+        \lstick{$\ket{\phi(a_1)}$}  & \qw            & \qw  & \gate{Z}      & \qw & \qw           & \qw & \qw                    & \qw & \qw      & \qw & \rstick{$\ket{(a+b)_1}$} \\
+        \lstick{$\ket{\phi(a_0)}$}  & \gate{Z}       & \qw  & \qw           & \qw & \qw           & \qw & \qw                    & \qw & \targX{} & \qw & \rstick{$\ket{(a+b)_0}$}
+    \end{quantikz}
+    \caption{Circuito cuántico para sumar dos números binarios, después de haber aplicado QFT}
+    \label{fig:sumacuantica2}
+\end{figure}
+
+Ahora procedemos a aplicar la compuerta Z tomando como control los qbits descritos en nuestro diagrama. Comenzando por el qbit \(\ket{\phi(a_0)}\) (qbit objetivo)
+y \(\ket{b_0}\) (qbit control) aplicamos Z:
+\[Z_3^2\ket{\phi(a_0)} = \frac{1}{\sqrt{2}}Z_3^2\ket{\left(\ket{0}+\exp[2\pi i 0.001]\ket{1}\right)}\]
+\[=\frac{1}{\sqrt{2}}\left(\ket{0}+ \left(\exp[2\pi i 0.001]\exp[2\pi i 0.010]\right)\ket{1}\right)\]
+\[=\frac{1}{\sqrt{2}}\left(\ket{0}+ \left(\exp[2\pi i (0.001+ 0.010)]\right)\ket{1}\right)\]
+\[=\frac{1}{\sqrt{2}}\left(\ket{0}+ \left(\exp[2\pi i (0.011)]\right)\ket{1}\right)\]
+Con lo cual hemos obtenido un nuevo elemento, el cual denotamos \(\ket{\phi(a_0)''}\):
+\[\underbrace{\frac{1}{\sqrt{2}}\ket{\left(\ket{0}+ \exp[2\pi i (0.011)]\ket{1}\right)}}_{\ket{\phi(a_0)''}}\]
+Haciendo un procedimiento análogo con los otros dos qbits, tenemos que para \(\ket{\phi(a_1)}\):
+\[Z_2^2\ket{\phi(a_1)} = \frac{1}{\sqrt{2}}Z_2^2\ket{\left(\ket{0}+\exp[2\pi i 0.01]\ket{1}\right)}\]
+\[=\frac{1}{\sqrt{2}}\left(\ket{0}+ \left(\exp[2\pi i (0.01+ 0.10)]\right)\ket{1}\right)\]
+\[=\frac{1}{\sqrt{2}}\left(\ket{0}+ \left(\exp[2\pi i (0.11)]\right)\ket{1}\right)\]
+Con lo cual hemos obtenido un nuevo elemento, el cual denotamos \(\ket{\phi(a_1)''}\)
+\[\underbrace{\frac{1}{\sqrt{2}}\ket{\left(\ket{0}+ \exp[2\pi i (0.11)]\ket{1}\right)}}_{\ket{\phi(a_1)''}}\]
+Finalmente para \(\ket{a_2}\) la rotación nos queda:
+\[Z_1^1\ket{\phi(a_2)} = \frac{1}{\sqrt{2}}Z_1^1\ket{\left(\ket{0}+\exp[2\pi i 0.0]\ket{1}\right)}\]
+\[=\frac{1}{\sqrt{2}}\left(\ket{0}+ \left(\exp[2\pi i (0.1+ 0.0)]\right)\ket{1}\right)\]
+\[=\frac{1}{\sqrt{2}}\left(\ket{0}+ \left(\exp[2\pi i (0.1)]\right)\ket{1}\right)\]
+Con lo cual hemos obtenido un nuevo elemento, el cual denotamos \(\ket{\phi(a_2)'}\)
+\[=\underbrace{\frac{1}{\sqrt{2}}\ket{\left(\ket{0}+ \exp[2\pi i (0.1)]\ket{1}\right)}}_{\ket{\phi(a_2)'}}\]
+Vemos que ahora nuestro diagrama se ha modificado a:
+\begin{figure}[H]
+    \centering
+    \begin{quantikz}
+        \lstick{$\ket{b_1}$}          &\qw&\qw &\qw&\qw&\rstick{$\ket{b_1}$}\\
+        \lstick{$\ket{b_0}$}          &\qw&\qw&\qw &\qw&\rstick{$\ket{b_0}$}\\
+        \lstick{$\ket{\phi(a_2)'}$}   &\qw&\qw&\gate[3]{QFT^{\dagger}}&\qw&\rstick{$\ket{(a+b)_2}$}\\
+        \lstick{$\ket{\phi(a_1)''}$}  &\qw&\qw&\qw&\qw&\rstick{$\ket{(a+b)_1}$}\\
+        \lstick{$\ket{\phi(a_0)''}$}  &\qw&\qw&\qw&\qw&\rstick{$\ket{(a+b)_0}$}\\
+    \end{quantikz}
+    \caption{Circuito cuántico para sumar dos números binarios, después de haber aplicado QFT, recordemos que un último paso de \(QFT^{\dagger}\)
+    es hacer un swap entre \(\) y las rotaciones correspondientes}
+    \label{fig:sumacuantica3}
+\end{figure}
+
+Finalmente aplicamos \(QFT^{\dagger}\) al ket conformado por \(\ket{\phi(a_2)'\phi(a_1)''\phi(a_0)''}\), esta operación se puede ver como:
+\[QFT^{\dagger}\ket{\phi(a_2)'\otimes\phi(a_1)''\otimes\phi(a_0)''}=QFT^{\dagger}\ket{\phi(a_2)'}\otimes QFT^{\dagger}\ket{\phi(a_1)''}\otimes QFT^{\dagger}\ket{\phi(a_0)''}\]
+Recordemos que \(QFT^{\dagger}\) realiza un swap, para este ejemplo, entre $\ket{\phi(a_2)'}$ y $\ket{\phi(a_1)''}$. Para de esta manera obtener
+la componente \(\ket{(a+b)_2}\text{, }\ket{(a+b)_1} \text{ y } \ket{(a+b)_0}\).
+\[=\ket{\ket{0}\otimes\ket{1}\otimes\ket{1}}\]
+\[=\ket{011}\]
+\[\implies 011_2 = 3_{10}=1+2\]
+
+%%%%%%%%%%%%%%%%%%%% ends document %%%%%%%%%%%%%%%%%%%%%%%%%%%5%%%%
+\end{document}

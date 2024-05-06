@@ -12,9 +12,6 @@
 \geometry{margin=1.2in}
 
 \usepackage[style=apa, backend=biber]{biblatex}
-\usepackage{graphicx}
-\usepackage{float}
-\usepackage{geometry}
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 \usepackage{xcolor}
@@ -23,12 +20,12 @@
 {colback=green!5,colframe=green!35!black,fonttitle=\bfseries}{th}
 
 \newtcbtheorem[number within=section]{mydef}{Definition}%
-{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{th}
+{colback=blue!5,colframe=blue!35!black,fonttitle=\bfseries}{def}
 
 
 
 \titleformat{\section}
-{\normalfont\Large\bfseries}{\thesection}{1em}{}
+{\normalfont\Large\bfseries}{\thesection}{1em}{} % Corregido aquí
 
 \title{Introduction to Mathematics of Quantum Computing}
 \author{Erick Jesús Ríos González}
@@ -37,14 +34,34 @@
 \begin{document}
 
 \maketitle
-\noindent A quantum computer is a device that performs computational operations 
-taking advantage of specific properties described by quantum mechanics.
-%%%%%%%%%%%%%%%%% begins the document %%%%%%%%%%%%%%%%
-\begin{mytheo}{This is my title}{theoexample}
-    This is the text of the theorem. The counter is automatically assigned and,
-    in this example, prefixed with the section number. This theorem is numbered with
-    \ref{th:theoexample} and is given on page \pageref{th:theoexample}.
-\end{mytheo}
+\noindent Quantum mechanics describes states of systems
+at microscopic scales, which generally means that only
+speaking in terms of probabilities is allowed.
+The state in a quantum system can be described as an
+element of a vector space.
+It is possible that the state of the system can be written as
+a linear combination of a basis of the vector space: \textcolor{red}{superposition}.
+The observables of a quantum system are those physical quantities that
+in principle can be determined simultaneously and with a precision constraint:
+\textcolor{red}{Heisenberg's uncertainty principle}. In other words, they can be measurable.
+
+Measurements on objects prepared "in the same way" are
+distributed with a relative frequency around a mean value.
+
+\begin{equation*}
+    \text{relative frequency} = \dfrac{\text{Number of measurements with result }a}{\text{Total number of measurements}}
+\end{equation*}
+\begin{equation*}
+    \text{mean value} = \sum_{a\in Measurements} a\times (\text{relative frequency of measurements with result } a)
+\end{equation*}
+\section{Hilbert Spaces}
+There are initial preparations whose state can be characterized with a vector
+in a Hilbert space (vector space).
+\begin{enumerate}
+    \item States that can be characterized with a vector are called
+    pure states.
+    \item Otherwise, we speak of "mixed states".
+\end{enumerate}
 \begin{mydef}{Hlbert Space}{defexample}
     A Hilbert Space $\mathbb{H}$ is a complete complex vector space, that is,
     \begin{equation}
@@ -58,30 +75,5 @@ taking advantage of specific properties described by quantum mechanics.
     \begin{equation*}
         \langle\Psi|\Phi\rangle = {\langle\Psi|\Phi\rangle}
     \end{equation*}
-    \begin{enumerate}
-        \item Primero definimos el invariante de ciclo. De nuestras clases de análisis dos podemos reordenar la serie de este problema bajo la siguiente definición:
-    \begin{mydef}{Convergencia Absoluta}{}
-        Se dice que la serie $\sum a_{n}$ es absolutamente convergente si la serie $\sum\left\vert a_{n}\right\vert$ es convergente . 
-    
-        $\sum a_{n}$ es absolutamente convergente $ \Longrightarrow \sum a_{n}$ es convergente .
-    \end{mydef}
-    esto nos permite escribir el invariante de ciclo como:
-    \begin{equation*}
-        total = \sum_{j=0}^{k-1-{i+1}}A[j+i+1]\cdot x_0^j
-    \end{equation*}
-    ya que se trata de una serie de elementos finitos que es absolutamente convergente.
-    Al inicio del ciclo, cuando $i=k-1$ y $\text{total} = 0$ por la suposición podemos demostrar que:
-    \begin{equation*}
-            \text{total} = \sum_{j=0}^{k-1-(k-1+1)} A[k-(k-1)+1]\cdot x_0^{(k-1)}
-    \end{equation*}
-    \begin{equation*}
-        \sum_{j=0}^{-1} A[k-(k-1)+1]\cdot x_0^{(k-1)}=0
-    \end{equation*}
-    Como la suma es vacía, el invariante de ciclo es correcto incluso antes de inicializar el ciclo.
-    \item Caso base (i=0):
-    \begin{equation*}
-        \text{total} = \sum_{j=0}^{-(k-1+1)} A[k-(k-1)+1]\cdot x_0^{(k-1)}
-    \end{equation*}
-    \item Hipótesis de inducción:
 \end{mydef}
 \end{document}
