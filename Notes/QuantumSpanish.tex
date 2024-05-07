@@ -10,6 +10,7 @@
 \usepackage{tikz}
 \usepackage{quantikz}
 \usepackage{braket}
+\usepackage{blochsphere}
 \geometry{margin=1.2in}
 
 \usepackage{tcolorbox}
@@ -39,6 +40,88 @@
 \begin{document}
 
 \maketitle
+\section{Motivación}
+La transformada cuántica de Fourier nos permite cambiar de una 
+base computacional a la base de Fourier. Nos permite pasar de 
+la base usual (base computacional):
+\[\ket{0} \& \ket{1}\]
+\[\begin{bmatrix}
+    1 \\
+    0
+\end{bmatrix} \&
+\begin{bmatrix}
+    0\\
+    1
+\end{bmatrix}\]
+a la base:
+\[\ket{+} \& \ket{-}\]
+\[\frac{1}{\sqrt{2}}\begin{bmatrix}
+    1 \\
+    1
+\end{bmatrix} \&\frac{1}{\sqrt{2}}
+\begin{bmatrix}
+    1\\
+    -1
+\end{bmatrix}\]
+Es decir, tomando un ejemplo
+podemos pasar de la representación:
+\begin{figure}[htbp]
+    \centering
+    
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \begin{blochsphere}[radius=1.5cm, tilt=15, rotation=-20, opacity=0.3, color=yellow]
+            \labelLatLon{up}{90}{0};
+            \labelLatLon{down}{-90}{90};
+            \node[above] at (up) {{\tiny $\left|0\right>$ }};
+            \node[below] at (down) {{\tiny $\left|1\right>$}};
+            \drawBallGrid[style={opacity=0.1}]{30}{60}
+            
+            % Qubit 1: Estado |0>
+            \drawStatePolar[axisarrow=true, color=green]{90}{0}{1}{\textcolor{blue}{$\ket{0}$}}
+        \end{blochsphere}
+        \caption*{Qubit 1: $|0\rangle$}
+    \end{minipage}%
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \begin{blochsphere}[radius=1.5cm, tilt=15, rotation=-20, opacity=0.3, color=orange]
+            \labelLatLon{up}{90}{0};
+            \labelLatLon{down}{-90}{90};
+            \node[above] at (up) {{\tiny $\left|0\right>$ }};
+            \node[below] at (down) {{\tiny $\left|1\right>$}};
+            \drawBallGrid[style={opacity=0.1}]{30}{60}
+
+            
+            % Qubit 2: Estado |1>
+            \drawStatePolar[axisarrow=true, color=green]{90}{180}{0}{\textcolor{blue}{$\ket{1}$}}
+        \end{blochsphere}
+        \caption*{Qubit 2: $|1\rangle$}
+    \end{minipage}%
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \begin{blochsphere}[radius=1.5cm, tilt=15, rotation=-20, opacity=0.3, color=red]
+            \labelLatLon{up}{90}{0};
+            \labelLatLon{down}{-90}{90};
+            \node[above] at (up) {{\tiny $\left|0\right>$ }};
+            \node[below] at (down) {{\tiny $\left|1\right>$}};
+            \drawBallGrid[style={opacity=0.1}]{30}{60}
+
+            
+            % Qubit 3: Estado |1>
+            \drawStatePolar[axisarrow=true, color=green]{90}{180}{0}{\textcolor{blue}{$\ket{1}$}}
+        \end{blochsphere}
+        \caption*{Qubit 3: $|1\rangle$}
+    \end{minipage}
+
+    \caption{La esfera de Bloch es una forma de representación gráfica del estado de 
+    un qubit. En la parte superior de la esfera colocamos el estado \(\ket{0}\), 
+    mientras que en la parte inferior el estado \(\ket{1}\). En el resto de la esfera
+    colocamos todos los posibles estados en superposición. }
+    \label{fig:blochsphere_tensor_professional}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% SECTION PREREQUISITES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Prerequisitos}
 %%%%%%%%%%%%%%%%% begins the document %%%%%%%%%%%%%%%%
 \noindent Necesitamos introducir notación para fracciones binarias,
