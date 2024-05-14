@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.14)  13 MAY 2024 23:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.3.14)  13 MAY 2024 23:15
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2178,16 +2178,16 @@ Package mdframed Info: Box was splittet wrong
 (mdframed)              on input line 245.
  [3]
 
-Package pgf Warning: Returning node center instead of a point on node border. Did you specify a point identical to the center of node ``tikz@f@1-2-7''? on input line 272.
+Package pgf Warning: Returning node center instead of a point on node border. Did you specify a point identical to the center of node ``tikz@f@1-2-7''? on input line 273.
 
 
-Package pgf Warning: Returning node center instead of a point on node border. Did you specify a point identical to the center of node ``tikz@f@1-2-7''? on input line 272.
+Package pgf Warning: Returning node center instead of a point on node border. Did you specify a point identical to the center of node ``tikz@f@1-2-7''? on input line 273.
 
 
-Package pgf Warning: Returning node center instead of a point on node border. Did you specify a point identical to the center of node ``tikz@f@1-2-9''? on input line 272.
+Package pgf Warning: Returning node center instead of a point on node border. Did you specify a point identical to the center of node ``tikz@f@1-2-9''? on input line 273.
 
 
-Package pgf Warning: Returning node center instead of a point on node border. Did you specify a point identical to the center of node ``tikz@f@1-2-9''? on input line 272.
+Package pgf Warning: Returning node center instead of a point on node border. Did you specify a point identical to the center of node ``tikz@f@1-2-9''? on input line 273.
 
 [4] [5] [6] (build/QuantumSpanish.aux
 LaTeX Info: Redefining \. on input line 9.
