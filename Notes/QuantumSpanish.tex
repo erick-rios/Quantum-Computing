@@ -176,6 +176,39 @@ podemos pasar de la siguiente representación de tres qubits:
     \label{fig:blochsphere_tensor_professional}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% BINARY ENCODE Y %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Representación Binaria de un Estado}
+\begin{mydef}{Representación Binaria}{}
+La representación binaria es un sistema de numeración en el que los números se expresan como combinaciones de potencias de 2, utilizando únicamente los dígitos 0 y 1. Cada dígito en una representación binaria se llama un bit. Por ejemplo, un número binario de \( n \) bits se puede expresar como:
+\[
+ \sum_{i=0}^{n-1} b_i \cdot 2^i = b_{n-1}b_{n-2}\ldots b_1b_0 
+\]
+donde \( b_i \) es el \( i \)-ésimo bit, con \( i \) variando desde 0 hasta \( n-1 \) de derecha a izquierda.
+\end{mydef}
+Sea \(y\in \mathbb{N}\cup\{0\}\). Utilizando la \texttt{Definición 3.1} proponemos la representación binaria
+de \(y\) como: 
+\[y= y_{n}y_{n-1}\ldots y_{0}\]
+Para un sistema de qubits esta representación sería:
+\[y= \ket{y_{n}y_{n-1}\ldots y_{0}}\]
+\begin{mdframed}[backgroundcolor=blue!10, linewidth=1pt, linecolor=blue]
+    Ejemplo:
+
+    Sea \(y= 3\), la rrepresentación binaria de \(y\) utilizando un sistema de qubits sería:
+    \[\ket{3} = \ket{011}\]
+\end{mdframed}
+
+Necesitamos introducir notación para fracciones binarias,
+lo cual nos ayudará a reescribir la Transformada Cuántica de Fourier (QFT)
+de manera simplista.
+\begin{mydef}{}{}
+    Para $a_1, \ldots, a_m \in \{0, 1\}$ definimos
+\[
+0.a_1a_2 \ldots a_m := \frac{a_1}{2} + \frac{a_2}{4} + \ldots + \frac{a_m}{2^m} =
+\sum_{l=1}^{m} a_l \cdot 2^{-l}.
+\]
+\end{mydef}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%% SECTION QFT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{La Transformada Cuántica de Fourier (QFT)}
@@ -199,16 +232,7 @@ Con lo que hemos obtenido nuestra primera definición de la Transformada Cuánti
     Definimos la Transformada Cuántica de Fourier como:
     \[\frac{1}{\sqrt{N}} \sum_{i=0}^{N-1} e^{\frac{2\pi i x y}{y}} \left| k_i \right\rangle.\]
 \end{mydef}
-Necesitamos introducir notación para fracciones binarias,
-lo cual nos ayudará a reescribir la Transformada Cuántica de Fourier (QFT)
-de manera simplista.
-\begin{mydef}{}{}
-    Para $a_1, \ldots, a_m \in \{0, 1\}$ definimos
-\[
-0.a_1a_2 \ldots a_m := \frac{a_1}{2} + \frac{a_2}{4} + \ldots + \frac{a_m}{2^m} =
-\sum_{l=1}^{m} a_l \cdot 2^{-l}.
-\]
-\end{mydef}
+
 De esta manera, podemos escribir QFT para cualquier vector \(\ket{x}\) utilizando el 
 siguiente lema:
 \begin{mylem}{}{}
@@ -221,28 +245,7 @@ siguiente lema:
     F|x\rangle = \frac{1}{\sqrt{2^n}} \bigotimes_{j=0}^{n-1} \left( |0\rangle + e^{2\pi i 0.x_j \ldots x_0} |1\rangle \right).
     \]
 \end{mylem}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%% BINARY ENCODE Y %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Representación Binaria de un Estado}
-\begin{mydef}{Representación Binaria}{}
-La representación binaria es un sistema de numeración en el que los números se expresan como combinaciones de potencias de 2, utilizando únicamente los dígitos 0 y 1. Cada dígito en una representación binaria se llama un bit. Por ejemplo, un número binario de \( n \) bits se puede expresar como:
-\[
- \sum_{i=0}^{n-1} b_i \cdot 2^i = b_{n-1}b_{n-2}\ldots b_1b_0 
-\]
-donde \( b_i \) es el \( i \)-ésimo bit, con \( i \) variando desde 0 hasta \( n-1 \) de derecha a izquierda.
-\end{mydef}
-Sea \(y\in \mathbb{N}\cup\{0\}\). Utilizando la \texttt{Definición 3.1} proponemos la representación binaria
-de \(y\) como: 
-\[y= y_{n}y_{n-1}\ldots y_{0}\]
-Para un sistema de qubits esta representación sería:
-\[y= \ket{y_{n}y_{n-1}\ldots y_{0}}\]
-\begin{mdframed}[backgroundcolor=blue!10, linewidth=1pt, linecolor=blue]
-    Ejemplo:
 
-    Sea \(y= 3\), la repesetación binaria de y utilizando un sistema de qubits sería:
-    \[\ket{3} = \ket{011}\]
-\end{mdframed}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

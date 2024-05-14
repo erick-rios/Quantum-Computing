@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1715663732 "/home/soundskydriver/Documents/Quantum Computing/Notes/QuantumSpanish.tex" "build/QuantumSpanish.pdf" "QuantumSpanish" 1715663735
+["pdflatex"] 1715664120 "/home/soundskydriver/Documents/Quantum Computing/Notes/QuantumSpanish.tex" "build/QuantumSpanish.pdf" "QuantumSpanish" 1715664123
   "/etc/texmf/web2c/texmf.cnf" 1709664237 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/soundskydriver/Documents/Quantum Computing/Notes/QuantumSpanish.tex" 1715663732 17732 e80d87331a8951dd702a976a2978caff ""
+  "/home/soundskydriver/Documents/Quantum Computing/Notes/QuantumSpanish.tex" 1715664117 17742 0fd5de7511f943c7c29334f4cf660664 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -239,8 +239,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1709664250 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1710426535 2800978 a184374ff06b170037ec5bc59dcfe104 ""
-  "QuantumSpanish.tex" 1715663732 17732 e80d87331a8951dd702a976a2978caff ""
-  "build/QuantumSpanish.aux" 1715663735 3027 5a57538a3fdecda1875700cc19a8ef53 "pdflatex"
+  "QuantumSpanish.tex" 1715664117 17742 0fd5de7511f943c7c29334f4cf660664 ""
+  "build/QuantumSpanish.aux" 1715664123 3027 061fc07abb2010fe229493464a982bd9 "pdflatex"
   (generated)
   "build/QuantumSpanish.aux"
   "build/QuantumSpanish.log"
