@@ -42,7 +42,13 @@
 \begin{document}
 
 \maketitle
-\section{Motivación}
+\begin{abstract}
+    Este es el resumen del documento. Aquí puedes escribir un breve resumen de tu trabajo, destacando los objetivos, métodos y conclusiones principales.
+\end{abstract}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% INTRODUCCIÓN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introducción}
 La transformada cuántica de Fourier nos permite cambiar de una 
 base computacional a la base de Fourier. Nos permite pasar de 
 la base usual (base computacional):
@@ -194,11 +200,16 @@ Para un sistema de qubits esta representación sería:
 \begin{mdframed}[linewidth=1pt, linecolor=orange]
     Ejemplo:
 
-    Sea \(y= 3\), la rrepresentación binaria de \(y\) utilizando un sistema de qubits sería:
+    \noindent Sea \(y= 3\), la representación binaria de \(y\) utilizando un sistema de qubits sería:
     \[\ket{3} = \ket{011}\]
+    Es decir, con un sistema de tres qubits se pueden representar los siguientes estados:
+    \[\{\ket{0},\ket{1},\ket{2},\ket{3},\ket{4},\ket{5},\ket{6},\ket{7}\}\]
+    \[\{\ket{000},\ket{001},\ket{010},\ket{011},\ket{100},\ket{101},\ket{110},\ket{111}\}\]
+    Recordemos esto, pues es lo que necesitamos para poder hacer sumas modulares utilizando la
+    Transformada Cuántica de Fourier.
 \end{mdframed}
 
-Necesitamos introducir notación para fracciones binarias,
+Tambien necesitamos introducir notación para fracciones binarias,
 lo cual nos ayudará a reescribir la Transformada Cuántica de Fourier (QFT)
 de manera simplista.
 \begin{mydef}{}{}
@@ -238,11 +249,11 @@ siguiente lema:
 \begin{mylem}{}{}
     Sea $n \in \mathbb{N}$ y
     \[
-    x = \frac{1}{\sqrt{2^n}} \sum_{j=0}^{n-1} x_j 2^j, \quad \text{donde } x_j \in \{0, 1\} \text{ para } j \in \{0, \ldots, n-1\}.
+    x =\sum_{j=0}^{n-1} x_j 2^j, \quad \text{donde } x_j \in \{0, 1\} \text{ para } j \in \{0, \ldots, n-1\}.
     \]
     Entonces la acción de la transformada cuántica de Fourier $F$ sobre cualquier vector $|x\rangle$ de la base computacional de $\mathcal{H}_n$ puede escribirse como
     \[
-    F|x\rangle = \frac{1}{\sqrt{2^n}} \bigotimes_{j=0}^{n-1} \left( |0\rangle + e^{2\pi i 0.x_j \ldots x_0} |1\rangle \right).
+    QFT\ket{x} = \frac{1}{\sqrt{2^n}} \bigotimes_{j=0}^{n-1} \left( \ket{0} + e^{2\pi i 0.x_j \ldots x_0} \ket{1} \right).
     \]
 \end{mylem}
 
@@ -291,11 +302,11 @@ Despues de la aplicación de QFT a el número A ahora tenemos que nuestro circui
 \begin{figure}[H]
     \centering
     \begin{quantikz}
-        \lstick{$\ket{b_1}$}        & \ctrl{4}       & \qw  & \ctrl{3}      & \qw & \qw           & \qw & \qw                    & \qw & \qw      & \qw & \rstick{$\ket{b_1}$} \\
-        \lstick{$\ket{b_0}$}        & \ctrl{1}       & \qw  & \ctrl{1}      & \qw & \ctrl{1}      & \qw & \qw                    & \qw & \qw      & \qw & \rstick{$\ket{b_0}$} \\
-        \lstick{$\ket{\phi(a_2)}$}  & \qw            & \qw  & \qw           & \qw & \gate{Z}      & \qw & \gate[3]{QFT^\dagger}  & \qw & \swap{2} & \qw & \rstick{$\ket{(a+b)_2}$} \\
-        \lstick{$\ket{\phi(a_1)}$}  & \qw            & \qw  & \gate{Z}      & \qw & \qw           & \qw & \qw                    & \qw & \qw      & \qw & \rstick{$\ket{(a+b)_1}$} \\
-        \lstick{$\ket{\phi(a_0)}$}  & \gate{Z}       & \qw  & \qw           & \qw & \qw           & \qw & \qw                    & \qw & \targX{} & \qw & \rstick{$\ket{(a+b)_0}$}
+        \lstick{$\ket{b_1}$}        & \ctrl{4}       & \qw  & \ctrl{3}      & \qw & \qw           & \qw & \qw                    & \qw  & \qw & \rstick{$\ket{b_1}$} \\
+        \lstick{$\ket{b_0}$}        & \ctrl{1}       & \qw  & \ctrl{1}      & \qw & \ctrl{1}      & \qw & \qw                    & \qw  & \qw & \rstick{$\ket{b_0}$} \\
+        \lstick{$\ket{\phi(a_2)}$}  & \qw            & \qw  & \qw           & \qw & \gate{Z}      & \qw & \gate[3]{QFT^\dagger}  & \qw  & \qw & \rstick{$\ket{(a+b)_2}$} \\
+        \lstick{$\ket{\phi(a_1)}$}  & \qw            & \qw  & \gate{Z}      & \qw & \qw           & \qw & \qw                    & \qw  & \qw & \rstick{$\ket{(a+b)_1}$} \\
+        \lstick{$\ket{\phi(a_0)}$}  & \gate{Z}       & \qw  & \qw           & \qw & \qw           & \qw & \qw                    & \qw  & \qw & \rstick{$\ket{(a+b)_0}$}
     \end{quantikz}
     \caption{Circuito cuántico para sumar dos números binarios, después de haber aplicado QFT}
     \label{fig:sumacuantica2}
